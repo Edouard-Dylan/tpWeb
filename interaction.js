@@ -2,11 +2,12 @@
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ. 
 function DnD(canvas, interactor) { 
   // Définir ici les attributs de la 'classe' 
-  this.xInit = 0; 
-  this.yInit = 0; 
-  this.xFinal = 0; 
-  this.yFinal = 0; 
+  this.xInit = 0;
+  this.yInit = 0;
+  this.xFinal = 0;
+  this.yFinal = 0;
   this.pressionFirst = false;
+  this.interactor = interactor;
   
   // Developper les 3 fonctions gérant les événements 
   function maFctGérantLaPression(evt){ 
@@ -14,7 +15,7 @@ function DnD(canvas, interactor) {
     this.xInit = xy.x;
     this.yInit = xy.y;
     this.pressionFirst = true;
-    console.log("Pression x:"+this.xInit+" y:"+this.yInit);
+    interactor.onInteractionStart(this);
   } 
   
   function maFctGérantLeDéplacement(evt){ 
@@ -22,7 +23,7 @@ function DnD(canvas, interactor) {
       let xy = getMousePosition(this,evt);
       this.xFinal = xy.x;
       this.yFinal = xy.y;
-      console.log("Déplacement x:"+this.xFinal+" y:"+this.yFinal);
+      interactor.onInteractionUpdate(this);
     }
   } 
 
@@ -32,7 +33,7 @@ function DnD(canvas, interactor) {
       this.xFinal = xy.x;
       this.yFinal = xy.y;
       this.pressionFirst = false;
-      console.log("Relachement x:"+this.xFinal+" y:"+this.yFinal);
+      interactor.onInteractionEnd(this);
     }
   }
   

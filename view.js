@@ -27,4 +27,23 @@ Drawing.prototype.paint = function(ctx) {
     eltDuTableau.paint(ctx);
   });
 };
+
+function updateShapeList(shape, index){
+  document.getElementById('shapeList').appendChild(toHTML(shape,index));
+}
   
+function toHTML(shape, index){
+  let li = document.createElement('li');
+  li.id = "liRemove"+index;
+  li.style.color = shape.color;
+  if(shape.constructor === Rectangle){
+    li.innerHTML = "Rect";
+  }else{
+    li.innerHTML = "Line";
+  }
+  li.innerHTML += `<button type="button" class="btn btn-default" id=remove${index}>
+	                  <span class="glyphicon glyphicon-remove-sign"></span>
+                  </button>`
+
+  return li
+}

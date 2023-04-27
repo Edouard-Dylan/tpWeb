@@ -1,7 +1,16 @@
 // Implémenter ici les 4 classes du modèle.
 function Drawing() {
     //Arttributs
-    this.shapeList = new Array();
+    this.shapeList = new Map();
+
+    this.addForm = function(key, shape){
+      console.log('add '+key)
+      this.shapeList.set(key,shape);
+    }
+
+    this.removeForm = function(key){
+      this.shapeList.delete(key);
+    }
 
     this.getForms = function(){
         return this.shapeList;
@@ -39,11 +48,11 @@ function Rectangle(x, y, width, height, thickness, color) {
     }
   
     this.getFinalX = function(){
-      return this.x+this.width;
+      return this.width;
     }
   
     this.getFinalY = function(){
-      return this.y+this.height;
+      return this.height;
     }
 }
 
